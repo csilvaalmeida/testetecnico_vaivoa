@@ -48,7 +48,7 @@ Para configurar o banco de dados, você precisa adicionar o item seguinte e troc
 
 Por fim, no arquivo `startup.cs` você precisa adicionar o seguinte trecho de código no topo da função 'ConfigureServices':
 ```csharp
-string mySqlConnection = Configuration.GetConnectionStrin("DefaultConnection");
+string mySqlConnection = Configuration.GetConnectionString("DefaultConnection");
 services.AddDbContextPool<AppDbContext>(options => 
     options.UseMySql(
         mySqlConnection, 
@@ -74,7 +74,7 @@ Em seguida crie os arquivos:
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace creditcardapi.Models
+namespace teste.Models
 {
     public class Cartao
     {
@@ -94,7 +94,7 @@ namespace creditcardapi.Models
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace creditcardapi.Models
+namespace teste.Models
 {
     public class Cliente
     {
@@ -113,7 +113,7 @@ E por fim, o arquivo de configuração para o seu banco de dados chamado de `App
 ```csharp
 using Microsoft.EntityFrameworkCore;
 
-namespace creditcardapi.Models
+namespace teste.Models
 {
     public class AppDbContext : DbContext 
     {
@@ -140,7 +140,7 @@ $ dotnet ef migrations add inicial -v
 Note que foi criada uma pasta chamada 'Migrations' dentro do seu projeto.
 Por fim, crie o seu banco de dados executando o comando:
 ```shell
-$ dotnet ef migrations update
+$ dotnet ef database update
 ```
 Se tudo ocorrer bem, o seu banco de dados será criado no MYSQL.
 
@@ -159,9 +159,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-using creditcardapi.Models;
+using teste.Models;
 
-namespace creditcardapi.Controllers
+namespace teste.Controllers
 {
     [ApiController]
     [Route("v1/cliente")]
@@ -192,9 +192,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-using creditcardapi.Models;
+using teste.Models;
 
-namespace creditcardapi.Controllers
+namespace teste.Controllers
 {
     [ApiController]
     [Route("v1/cartao")]
